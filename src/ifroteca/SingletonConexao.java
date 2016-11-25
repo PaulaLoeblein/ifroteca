@@ -14,27 +14,32 @@ import java.sql.Statement;
 				   senha = "root";
 	
 	private SingletonConexao(){
-		
 		try{
-			Class.forName("com.mysql.jdbc.Driver");
-    		this.conexao = DriverManager.getConnection(url, usuario, senha);
-    		stm = conexao.createStatement();
-		} catch (SQLException sqle) {
-	         sqle.printStackTrace();
-	      } catch (ClassNotFoundException cnfe) {
-	         cnfe.printStackTrace();
-	      } 
+		    Class.forName("com.mysql.jdbc.Driver");
+    		    this.conexao = DriverManager.getConnection(url, usuario, senha);
+    		    stm = conexao.createStatement();
+		} catch (SQLException sqle) {		
+	             sqle.printStackTrace();
+	        } catch (ClassNotFoundException cnfe) {
+	             cnfe.printStackTrace();
+	        } 
 	   }
 	
-	private static SingletonConexao getSingleton(){
+	private static SingletonConexao getInstance(){
 		if (instance == null){
 			instance = new SingletonConexao();
 		}
 		return instance;
 	}
-	
+		
 	public Connection getConexao(){
-		return this.conexao;
+	    return conexao;
 	}
-
+		
+	/*
+	* Modo de uso:
+	* SingletonConexao singleton = SingetonConexao.getInstance();
+	* Connection con = singleton.getConexao();
+	* Agora você tem a conexão para utilizar.
+	*/
 }
