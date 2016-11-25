@@ -28,7 +28,7 @@ public class CadastrarAluno extends JFrame{
     			   lblEmail = new JLabel("E-mail"),
     			   lblFone = new JLabel("Telefone"),
     			   lblDataNasc = new JLabel("Data de Nascimento"),
-    			   lblEndereco = new JLabel("EndereÁo"),
+    			   lblEndereco = new JLabel("Endere√ßo"),
     			   lblCidade = new JLabel("Cidade"),
     			   lblTurma = new JLabel("Turma"),
     			   lblCurso = new JLabel("Curso");
@@ -59,7 +59,7 @@ public class CadastrarAluno extends JFrame{
     
     public boolean validaCampos(){
         if(txtNome.getText().trim().length() == 0 || txtCPF.getText().trim().length() == 0 || txtCidade.getText().trim().length() == 0 || txtCurso.getText().trim().length() == 0 || txtDataNasc.getText().trim().length() == 0 || txtEmail.getText().trim().length() == 0 || txtTurma.getText().trim().length() == 0 || txtRG.getText().trim().length() == 0 || txtEndereco.getText().trim().length() == 0 || txtFone.getText().trim().length() == 0){
-            JOptionPane.showMessageDialog(null, "Algum campo n„o foi preenchido!");
+            JOptionPane.showMessageDialog(null, "Algum campo n√£o foi preenchido!");
             return false;
         }
         return true;
@@ -203,11 +203,11 @@ public class CadastrarAluno extends JFrame{
         
     }
 
-private Connection conexao;
-private Statement stm;
-private String url = "jdbc:mysql://localhost/ifroteca",
-			   usuario = "root",
-			   senha = "root";
+    private Connection conexao;
+    private Statement stm;
+    private String url = "jdbc:mysql://localhost/ifroteca",
+    			   usuario = "root",
+    			   senha = "root";
 
 
     public void salvar() {
