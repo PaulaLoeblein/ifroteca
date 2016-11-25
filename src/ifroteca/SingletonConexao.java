@@ -25,7 +25,7 @@ import java.sql.Statement;
 	        } 
 	   }
 	
-	private static SingletonConexao getInstance(){
+	protected static SingletonConexao getInstance(){
 		if (instance == null){
 			instance = new SingletonConexao();
 		}
