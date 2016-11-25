@@ -203,19 +203,15 @@ public class CadastrarAluno extends JFrame{
         
     }
 
-    private Connection conexao;
-    private Statement stm;
-    private String url = "jdbc:mysql://localhost/ifroteca",
-    			   usuario = "root",
-    			   senha = "root";
+   
 
-
+    
     public void salvar() {
     	try {
-    		Class.forName("com.mysql.jdbc.Driver");
-    		conexao = DriverManager.getConnection(url, usuario, senha);
-    		stm = conexao.createStatement();
-                PreparedStatement pstm = conexao.prepareStatement("insert into aluno (nome_alu, cpf_alu, rg_alu, email_alu, fone_alu, endereco_alu, dataNasc_alu, cidade_alu, turma_alu, curso_alu) values (?,?,?,?,?,?,?,?,?,?)");
+    		SingletonConexao singleton = SingletonConexao.getInstance();
+    		Connection con = singleton.getConexao();
+
+                PreparedStatement pstm = con.prepareStatement("insert into aluno (nome_alu, cpf_alu, rg_alu, email_alu, fone_alu, endereco_alu, dataNasc_alu, cidade_alu, turma_alu, curso_alu) values (?,?,?,?,?,?,?,?,?,?)");
                 pstm.setString(1, txtNome.getText());
                 pstm.setString(2, txtCPF.getText());
                 pstm.setString(3, txtRG.getText());
@@ -244,9 +240,10 @@ public class CadastrarAluno extends JFrame{
 
     public void exibir() {
     	try {
-    		Class.forName("com.mysql.jdbc.Driver");
-    		conexao = DriverManager.getConnection(url, usuario, senha);
-    		stm = conexao.createStatement();
+    		SingletonConexao singleton = SingletonConexao.getInstance();
+    		Connection con = singleton.getConexao();
+    		Statement stm = con.createStatement();
+    		
     		String sql = "select * from aluno";
     		ResultSet rs = stm.executeQuery(sql);
     		while (rs.next()){
