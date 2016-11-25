@@ -14,6 +14,8 @@ turma_alu varchar (30),
 curso_alu varchar (20),
 primary key (cod_alu)
 );
+select * from aluno;
+
 create table bibliotecario(
 cod_bib int auto_increment not null,
 nome_bib varchar (100),
