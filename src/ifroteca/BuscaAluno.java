@@ -28,6 +28,19 @@ public class BuscaAluno extends JFrame {
 	private JPanel painel1 = new JPanel();
 
 	private JTable tabela;
+        
+        public BuscaAluno(){
+            initComponents();
+        }
+        
+        private void initComponents(){
+            btnBuscar.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					buscar();
+				}
+			});
+        }
 
 	public void getTabela() {
 		Statement sentenca;
@@ -83,12 +96,13 @@ public class BuscaAluno extends JFrame {
 			getContentPane().add(btnBuscar);
 			btnBuscar.setBounds(570, 585, 80, 24);
 
+                        /*
 			btnBuscar.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					buscar();
 				}
-			});
+			});*/
 
 		} catch (SQLException sqlex) {
 			sqlex.printStackTrace();
