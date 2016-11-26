@@ -2,11 +2,9 @@ package ifroteca;
 
 
 import java.awt.Dimension;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -18,6 +16,7 @@ import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class CadastrarAluno extends JFrame{
@@ -44,6 +43,7 @@ public class CadastrarAluno extends JFrame{
                                 txtDataNasc = new JFormattedTextField(),
                                 txtFone = new JFormattedTextField();
     
+    private JPanel painel1 = new JPanel();
     
     private ArrayList<JTextField> textFields = new ArrayList();
     
@@ -108,9 +108,31 @@ public class CadastrarAluno extends JFrame{
         
         iniArray();
 
+		painel1.add(lblNome);
+		painel1.add(txtNome);
+		painel1.add(lblCPF);
+		painel1.add(txtCPF);
+		painel1.add(lblRG);
+		painel1.add(txtRG);
+		painel1.add(lblEmail);
+		painel1.add(txtEmail);
+		painel1.add(lblFone);
+		painel1.add(txtFone);
+		painel1.add(lblDataNasc);
+		painel1.add(txtDataNasc);
+		painel1.add(lblEndereco);
+		painel1.add(txtEndereco);
+		painel1.add(lblCidade);
+		painel1.add(txtCidade);
+		painel1.add(lblTurma);
+		painel1.add(txtTurma);
+		painel1.add(lblCurso);
+		painel1.add(txtCurso);
+		
+		painel1.add(btnSalvar);
+		painel1.add(btnExibir);
+		painel1.add(btnLimpar);
         setTitle("Cadastrar Aluno");
-        getContentPane().setLayout(null);
-    	
         this.setResizable(false);
         
 
@@ -171,6 +193,11 @@ public class CadastrarAluno extends JFrame{
 		btnExibir.setBounds(570, 530, 80, 24);
         getContentPane().add(btnLimpar);
         btnLimpar.setBounds(660, 530, 80, 24);
+        getContentPane().add(painel1);
+        
+        
+        
+        this.add(painel1); 
         
         btnLimpar.addActionListener(new ActionListener() {
             @Override
@@ -202,9 +229,6 @@ public class CadastrarAluno extends JFrame{
         this.pack();
         
     }
-
-   
-
     
     public void salvar() {
     	try {
