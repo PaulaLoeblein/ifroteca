@@ -15,14 +15,17 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 
 public class BuscaAluno extends JFrame {
 	private JLabel lblNome = new JLabel("Nome");
 	private JTextField txtNome = new JTextField();
 	private JButton btnBuscar = new JButton("Buscar");
+	private JPanel painel1 = new JPanel();
 
 	private JTable tabela;
 
@@ -45,7 +48,7 @@ public class BuscaAluno extends JFrame {
 	private void exibeResultSet(ResultSet rs) throws SQLException {
 		boolean maisRegistros = rs.next();
 		if (!maisRegistros) {
-			JOptionPane.showMessageDialog(this, "Não ha registros!");
+			JOptionPane.showMessageDialog(this, "NÃ£o ha registros!");
 			return;
 		}
 		Vector cabecalhos = new Vector();
@@ -53,14 +56,14 @@ public class BuscaAluno extends JFrame {
 		try {
 			ResultSetMetaData rsmd = rs.getMetaData();
 			// for (int i = 1; i<=rsmd.getColumnCount();i++)
-			cabecalhos.addElement("Código");
+			cabecalhos.addElement("CÃ³digo");
 			cabecalhos.addElement("Nome");
 			cabecalhos.addElement("CPF");
 			cabecalhos.addElement("RG");
 			cabecalhos.addElement("Email");
 			cabecalhos.addElement("Telefone");
 			cabecalhos.addElement("Data de Nasc.");
-			cabecalhos.addElement("Endereço");
+			cabecalhos.addElement("EndereÃ§o");
 			cabecalhos.addElement("Cidade");
 			cabecalhos.addElement("Turma");
 			cabecalhos.addElement("Curso");
@@ -142,3 +145,4 @@ public class BuscaAluno extends JFrame {
 	}
 
 }
+
