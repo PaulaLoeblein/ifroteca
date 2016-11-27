@@ -24,14 +24,15 @@ public class CadastrarLivro extends JFrame {
 
 	private JLabel lblTitulo = new JLabel("Titulo"), lblAutor = new JLabel("Autor"), lblEditora = new JLabel("Editora"),
 			lblQuantidade = new JLabel("Quantidade"), lblDataCadastro = new JLabel("Data de Cadastro"),
-			lblIdioma = new JLabel("Idioma"), lblCodigoLivro = new JLabel("CÛdigo do Livro"),
-			lblGenero = new JLabel("GÍnero"), lblAreaEnsino = new JLabel("¡rea de Ensino");
+			lblIdioma = new JLabel("Idioma"), lblCodigoLivro = new JLabel("C√≥digo do Livro"),
+			lblGenero = new JLabel("G√™nero"), lblAreaEnsino = new JLabel("√Årea de Ensino"), lblAno = new JLabel("Ano");
 
 	private JTextField txtTitulo = new JTextField(), txtAutor = new JTextField(), txtEditora = new JTextField(),
 			txtQuantidade = new JTextField(), txtIdioma = new JTextField(), txtCodigoLivro = new JTextField(),
 			txtGenero = new JTextField(), txtAreaEnsino = new JTextField();
 
-	private JFormattedTextField txtDataCadastro = new JFormattedTextField();
+	private JFormattedTextField txtDataCadastro = new JFormattedTextField(),
+								txtAno = new JFormattedTextField();
 
 	private ArrayList<JTextField> textFields = new ArrayList();
 
@@ -54,6 +55,7 @@ public class CadastrarLivro extends JFrame {
 		txtTitulo.setText(l.getTitulo());
 		txtAutor.setText(l.getAutor());
 		txtEditora.setText(l.getEditora());
+		txtAno.setText(l.getAno());
 		txtQuantidade.setText(l.getQuantidade());
 		txtDataCadastro.setText(l.getDataCadastro());
 		txtIdioma.setText(l.getIdioma());
@@ -63,12 +65,16 @@ public class CadastrarLivro extends JFrame {
 
 	}
 	
-	private void iniComponents() {
-		int qtd = Integer.parseInt(txtQuantidade.getText());
-	
+	private void iniComponents() {	
 		
 		try{
             txtDataCadastro.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+		
+		try{
+			txtAno.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####")));
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -93,14 +99,19 @@ public class CadastrarLivro extends JFrame {
 		txtAutor.setBounds(360, 205, 500, 24);
 
 		getContentPane().add(lblQuantidade);
-		lblQuantidade.setBounds(660, 240, 120, 24);
+		lblQuantidade.setBounds(760, 240, 100, 24);
 		getContentPane().add(txtQuantidade);
-		txtQuantidade.setBounds(660, 265, 200, 24);
+		txtQuantidade.setBounds(760, 265, 100, 24);
 
 		getContentPane().add(lblEditora);
 		lblEditora.setBounds(360, 240, 120, 24);
 		getContentPane().add(txtEditora);
 		txtEditora.setBounds(360, 265, 270, 24);
+		
+		getContentPane().add(lblAno);
+		lblAno.setBounds(660, 240, 120, 24);
+		getContentPane().add(txtAno);
+		txtAno.setBounds(660, 265, 70, 24);
 
 		getContentPane().add(lblDataCadastro);
 		lblDataCadastro.setBounds(360, 300, 120, 24);
@@ -162,32 +173,28 @@ public class CadastrarLivro extends JFrame {
 
 	}
 
-	private Connection conexao;
-	private Statement stm;
-	private String url = "jdbc:mysql://localhost/ifroteca", usuario = "root", senha = "root";
-
 	public void salvar() {
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			conexao = DriverManager.getConnection(url, usuario, senha);
-			stm = conexao.createStatement();
-			PreparedStatement pstm = conexao.prepareStatement("insert into livro (titulo_liv, autor_liv, editora_liv, quantidade_liv, dataCadastro_liv, idioma_liv, codigoLivro_liv, genero_liv, areaEnsino_liv) values (?,?,?,?,?,?,?,?,?)");
+			SingletonConexao singleton = SingletonConexao.getInstance();
+			Connection con = singleton.getConexao();
+			PreparedStatement pstm = con.prepareStatement("insert into livro (titulo_liv, autor_liv, editora_liv, anoPubli_liv, quantidade_liv, dataCadastro_liv, idioma_liv, codigoLivro_liv, genero_liv, areaEnsino_liv) values (?,?,?,?,?,?,?,?,?,?)");
+			
 			pstm.setString(1, txtTitulo.getText());
 			pstm.setString(2, txtAutor.getText());
 			pstm.setString(3, txtEditora.getText());
 			
-			String.valueOf(txtQuantidade.getText());
-			//pstm.setInt(4, qtd);
+			pstm.setString(4, txtEditora.getText());
+			pstm.setString(5, String.valueOf(txtQuantidade.getText()));
 
 			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 			Date dataCadastro = sdf.parse(txtDataCadastro.getText());
 			java.sql.Date sqlDate = new java.sql.Date(dataCadastro.getTime());
 
-			pstm.setDate(5, sqlDate);
-			pstm.setString(6, txtIdioma.getText());
-			pstm.setString(7, txtCodigoLivro.getText());
-			pstm.setString(8, txtGenero.getText());
-			pstm.setString(9, txtAreaEnsino.getText());
+			pstm.setDate(6, sqlDate);
+			pstm.setString(7, txtIdioma.getText());
+			pstm.setString(8, txtCodigoLivro.getText());
+			pstm.setString(9, txtGenero.getText());
+			pstm.setString(10, txtAreaEnsino.getText());
 
 			pstm.execute();
 
@@ -200,15 +207,16 @@ public class CadastrarLivro extends JFrame {
 
 	public void exibir() {
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			conexao = DriverManager.getConnection(url, usuario, senha);
-			stm = conexao.createStatement();
+			SingletonConexao singleton = SingletonConexao.getInstance();
+			Connection con = singleton.getConexao();
 			String sql = "select * from livro";
-			ResultSet rs = stm.executeQuery(sql);
+			Statement stm = con.createStatement();
+    		ResultSet rs = stm.executeQuery(sql);
 			while (rs.next()) {
 				System.out.println("Titulo: " + rs.getString("titulo_liv"));
 				System.out.println("Autor: " + rs.getString("autor_liv"));
 				System.out.println("Editora: " + rs.getString("editora_liv"));
+				System.out.println("Ano de Publica√ß√£o: " + rs.getString("anoPubli_liv"));
 				System.out.println("Quantidade: " + rs.getString("quantidade_liv"));
 				System.out.println("Data de Cadastro: " + rs.getString("dataCadastro_liv"));
 				System.out.println("Idioma: " + rs.getString("idioma_liv"));
@@ -235,7 +243,8 @@ public class CadastrarLivro extends JFrame {
 		l.setTitulo("");
 		l.setAutor("");
 		l.setEditora("");
-		l.setQuantidade("");
+		l.setAno("");
+		l.setQuantidade(String.valueOf(0));
 		l.setDataCadastro("");
 		l.setIdioma("");
 		l.setCodigoLivro("");
@@ -251,6 +260,7 @@ public class CadastrarLivro extends JFrame {
 		textFields.add(txtTitulo);
 		textFields.add(txtAutor);
 		textFields.add(txtEditora);
+		textFields.add(txtAno);
 		textFields.add(txtQuantidade);
 		textFields.add(txtDataCadastro);
 		textFields.add(txtIdioma);
