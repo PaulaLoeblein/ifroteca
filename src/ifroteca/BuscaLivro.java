@@ -40,6 +40,15 @@ public class BuscaLivro extends JFrame {
 				buscar();
 			}
 		});
+		
+		setBounds(80, 05, 0, 0);
+		this.setPreferredSize(new Dimension(1220, 720));
+		this.setResizable(false);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.pack();
+		this.buscar();
+		this.setTitle("Buscar Cadastro de Livro");
+		this.getContentPane().setLayout(null);
 	}
 
 	public void getTabela() {
@@ -61,23 +70,23 @@ public class BuscaLivro extends JFrame {
 	private void exibeResultSet(ResultSet rs) throws SQLException {
 		boolean maisRegistros = rs.next();
 		if (!maisRegistros) {
-			JOptionPane.showMessageDialog(this, "N„o ha registros!");
+			JOptionPane.showMessageDialog(this, "N√£o ha registros!");
 			return;
 		}
 		Vector cabecalhos = new Vector();
 		Vector linhas = new Vector();
 		try {
 			ResultSetMetaData rsmd = rs.getMetaData();
-			cabecalhos.addElement("CÛdigo");
+			cabecalhos.addElement("C√≥digo");
 			cabecalhos.addElement("Titulo");
 			cabecalhos.addElement("Autor");
 			cabecalhos.addElement("Editora");
 			cabecalhos.addElement("Quantidade");
 			cabecalhos.addElement("Data de Cadastro");
 			cabecalhos.addElement("Idioma");
-			cabecalhos.addElement("CÛd. Livro");
-			cabecalhos.addElement("GÍnero");
-			cabecalhos.addElement("¡rea de Ensino");
+			cabecalhos.addElement("C√≥d. Livro");
+			cabecalhos.addElement("G√™nero");
+			cabecalhos.addElement("√Årea de Ensino");
 			
 			do {
 				linhas.addElement(getProximaLinha(rs, rsmd));
@@ -139,14 +148,7 @@ public class BuscaLivro extends JFrame {
 	public static void main(String[] args) {
 		BuscaLivro bl = new BuscaLivro();
 		bl.setVisible(true);
-		bl.setBounds(80, 05, 0, 0);
-		bl.setPreferredSize(new Dimension(1220, 720));
-		bl.setResizable(false);
-		bl.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		bl.pack();
-		bl.buscar();
-		bl.setTitle("Buscar Cadastro de Livro");
-		bl.getContentPane().setLayout(null);
+		
 	}
 
 }
