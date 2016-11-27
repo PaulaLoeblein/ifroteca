@@ -10,6 +10,7 @@ public final class Livro {
 	private String codigoLivro;
 	private String genero;
 	private String areaEnsino;
+        private int ano;
 
 	public String getTitulo() {
 		return titulo;
@@ -82,5 +83,19 @@ public final class Livro {
 	public void setAreaEnsino(String areaEnsino) {
 		this.areaEnsino = areaEnsino;
 	}
+
+    /**
+     * @return the ano
+     */
+    public int getAno() {
+        return ano;
+    }
+
+    /**
+     * @param ano the ano to set
+     */
+    public void setAno(int ano) {
+        this.ano = ano;
+    }
 
 }
