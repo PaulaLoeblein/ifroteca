@@ -40,6 +40,15 @@ public class BuscaBibliotecario extends JFrame {
 				buscar();
 			}
 		});
+		
+		setBounds(80, 05, 0, 0);
+		this.setPreferredSize(new Dimension(1220, 720));
+		this.setResizable(false);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.pack();
+		this.buscar();
+		this.setTitle("Buscar Cadastro de Bibliotec√°rio");
+		this.getContentPane().setLayout(null);
 	}
 
 	public void getTabela() {
@@ -61,21 +70,21 @@ public class BuscaBibliotecario extends JFrame {
 	private void exibeResultSet(ResultSet rs) throws SQLException {
 		boolean maisRegistros = rs.next();
 		if (!maisRegistros) {
-			JOptionPane.showMessageDialog(this, "N„o ha registros!");
+			JOptionPane.showMessageDialog(this, "N√£o ha registros!");
 			return;
 		}
 		Vector cabecalhos = new Vector();
 		Vector linhas = new Vector();
 		try {
 			ResultSetMetaData rsmd = rs.getMetaData();
-			cabecalhos.addElement("CÛdigo");
+			cabecalhos.addElement("C√≥digo");
 			cabecalhos.addElement("Nome");
 			cabecalhos.addElement("CPF");
 			cabecalhos.addElement("RG");
 			cabecalhos.addElement("Email");
 			cabecalhos.addElement("Telefone");
 			cabecalhos.addElement("Data de Nasc.");
-			cabecalhos.addElement("EndereÁo");
+			cabecalhos.addElement("Endere√ßo");
 			cabecalhos.addElement("Cidade");
 			
 			do {
@@ -138,14 +147,7 @@ public class BuscaBibliotecario extends JFrame {
 	public static void main(String[] args) {
 		BuscaBibliotecario bb = new BuscaBibliotecario();
 		bb.setVisible(true);
-		bb.setBounds(80, 05, 0, 0);
-		bb.setPreferredSize(new Dimension(1220, 720));
-		bb.setResizable(false);
-		bb.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		bb.pack();
-		bb.buscar();
-		bb.setTitle("Buscar Cadastro de Bibliotecario");
-		bb.getContentPane().setLayout(null);
+
 	}
 
 }
