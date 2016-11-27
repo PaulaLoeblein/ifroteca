@@ -55,8 +55,8 @@ public class CadastrarLivro extends JFrame {
 		txtTitulo.setText(l.getTitulo());
 		txtAutor.setText(l.getAutor());
 		txtEditora.setText(l.getEditora());
-		txtAno.setText(String.valueOf(l.getAno()));
-		txtQuantidade.setText(String.valueOf(l.getQuantidade()));
+		txtAno.setText(l.getAno());
+		txtQuantidade.setText(l.getQuantidade());
 		txtDataCadastro.setText(l.getDataCadastro());
 		txtIdioma.setText(l.getIdioma());
 		txtCodigoLivro.setText(l.getCodigoLivro());
@@ -243,8 +243,8 @@ public class CadastrarLivro extends JFrame {
 		l.setTitulo("");
 		l.setAutor("");
 		l.setEditora("");
-		l.setAno(0);
-		l.setQuantidade(0);
+		l.setAno("");
+		l.setQuantidade(String.valueOf(0));
 		l.setDataCadastro("");
 		l.setIdioma("");
 		l.setCodigoLivro("");
