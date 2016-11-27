@@ -22,9 +22,9 @@ import javax.swing.text.MaskFormatter;
 
 public class Emprestimo extends JFrame {
 
-	private JLabel lblDataEmp = new JLabel("Data do EmprÈstimo"),
-			lblDataDev = new JLabel("Data Prevista para DevoluÁ„o"), lblAluno = new JLabel("CPF do Aluno"),
-			lblBibliotecario = new JLabel("CPF do Bibliotec·rio"), lblCodLivro = new JLabel("CÛdigo do Livro");
+	private JLabel lblDataEmp = new JLabel("Data do Empr√©stimo"),
+			lblDataDev = new JLabel("Data Prevista para Devolu√ß√£o"), lblAluno = new JLabel("CPF do Aluno"),
+			lblBibliotecario = new JLabel("CPF do Bibliotec√°rio"), lblCodLivro = new JLabel("C√≥digo do Livro");
 	
 	private JTextField txtCodLivro = new JTextField();
 	
@@ -44,7 +44,7 @@ public class Emprestimo extends JFrame {
 		if (txtAluno.getText().trim().length() == 0 || txtBibliotecario.getText().trim().length() == 0
 				|| txtDataEmp.getText().trim().length() == 0 || txtDataDev.getText().trim().length() == 0
 				|| txtCodLivro.getText().trim().length() == 0) {
-			JOptionPane.showMessageDialog(null, "Algum campo n„o foi preenchido!");
+			JOptionPane.showMessageDialog(null, "Algum campo n√£o foi preenchido!");
 			return false;
 		}
 		return true;
@@ -96,7 +96,7 @@ public class Emprestimo extends JFrame {
 
 		iniArray();
 
-		setTitle("EmprÈstimo");
+		setTitle("Empr√©stimo");
 		getContentPane().setLayout(null);
 
 		this.setResizable(false);
@@ -109,12 +109,12 @@ public class Emprestimo extends JFrame {
 		getContentPane().add(lblDataEmp);
 		lblDataEmp.setBounds(360, 250, 120, 24);
 		getContentPane().add(txtDataEmp);
-		txtDataEmp.setBounds(360, 275, 180, 24);
+		txtDataEmp.setBounds(360, 275, 235, 24);
 
 		getContentPane().add(lblDataDev);
-		lblDataDev.setBounds(570, 250, 180, 24);
+		lblDataDev.setBounds(625, 250, 200, 24);
 		getContentPane().add(txtDataDev);
-		txtDataDev.setBounds(570, 275, 180, 24);
+		txtDataDev.setBounds(625, 275, 235, 24);
 
 		getContentPane().add(lblAluno);
 		lblAluno.setBounds(360, 310, 120, 24);
@@ -214,11 +214,11 @@ public class Emprestimo extends JFrame {
 							+ "emprestimo.cod_emp = aluno.cod_alu";
 			ResultSet rs = stm.executeQuery(sql);
 			while (rs.next()) {
-				System.out.println("CÛdigo do Livro: " + rs.getString("codigoLivro_liv"));
-				System.out.println("Data de EmprÈstimo: " + rs.getString("dataReserva"));
-				System.out.println("Data Prevista para DevoluÁ„o: " + rs.getString("dataPrevistaEmp"));
-				System.out.println("CÛdigo do Aluno: " + rs.getString("cpf_alu"));
-				System.out.println("CÛdigo do Bibliotec·rio: " + rs.getString("cpf_bib"));
+				System.out.println("C√≥digo do Livro: " + rs.getString("codigoLivro_liv"));
+				System.out.println("Data de Empr√©stimo: " + rs.getString("dataReserva"));
+				System.out.println("Data Prevista para Devolu√ß√£o: " + rs.getString("dataPrevistaEmp"));
+				System.out.println("C√≥digo do Aluno: " + rs.getString("cpf_alu"));
+				System.out.println("C√≥digo do Bibliotec√°rio: " + rs.getString("cpf_bib"));
 
 			}
 			stm.close();
