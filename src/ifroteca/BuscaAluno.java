@@ -19,7 +19,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.table.DefaultTableModel;
+
 
 public class BuscaAluno extends JFrame {
 	private JLabel lblNome = new JLabel("Nome");
@@ -28,19 +28,28 @@ public class BuscaAluno extends JFrame {
 	private JPanel painel1 = new JPanel();
 
 	private JTable tabela;
-        
-        public BuscaAluno(){
-            initComponents();
-        }
-        
-        private void initComponents(){
-            btnBuscar.addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					buscar();
-				}
-			});
-        }
+
+	public BuscaAluno() {
+		initComponents();
+	}
+
+	private void initComponents() {
+		btnBuscar.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				buscar();
+			}
+		});
+		
+		setBounds(80, 05, 0, 0);
+		this.setPreferredSize(new Dimension(1220, 720));
+		this.setResizable(false);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.pack();
+		this.buscar();
+		this.setTitle("Buscar Cadastro de Aluno");
+		this.getContentPane().setLayout(null);
+	}
 
 	public void getTabela() {
 		Statement sentenca;
@@ -68,7 +77,7 @@ public class BuscaAluno extends JFrame {
 		Vector linhas = new Vector();
 		try {
 			ResultSetMetaData rsmd = rs.getMetaData();
-			// for (int i = 1; i<=rsmd.getColumnCount();i++)
+			
 			cabecalhos.addElement("Código");
 			cabecalhos.addElement("Nome");
 			cabecalhos.addElement("CPF");
@@ -95,14 +104,6 @@ public class BuscaAluno extends JFrame {
 			txtNome.setBounds(360, 165, 500, 24);
 			getContentPane().add(btnBuscar);
 			btnBuscar.setBounds(570, 585, 80, 24);
-
-                        /*
-			btnBuscar.addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					buscar();
-				}
-			});*/
 
 		} catch (SQLException sqlex) {
 			sqlex.printStackTrace();
@@ -148,15 +149,6 @@ public class BuscaAluno extends JFrame {
 	public static void main(String[] args) {
 		BuscaAluno ba = new BuscaAluno();
 		ba.setVisible(true);
-		ba.setBounds(80, 05, 0, 0);
-		ba.setPreferredSize(new Dimension(1220, 720));
-		ba.setResizable(false);
-		ba.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		ba.pack();
-		ba.buscar();
-		ba.setTitle("Buscar Cadastro de Aluno");
-		ba.getContentPane().setLayout(null);
 	}
 
 }
-
